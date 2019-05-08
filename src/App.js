@@ -108,7 +108,7 @@ class App extends React.Component {
           users.map(user => {
             const { id, name } = user;
             return (
-              <div key={name}>
+              <div>
                 <p>ID: {id}</p>
                 <p>Name: {name}</p>
                 <hr />
