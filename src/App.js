@@ -1,5 +1,9 @@
 import React, { useState, Fragment } from 'react'
 import ReactDOM from 'react-dom'
+// import React, { Component } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+
+
 // import AddUserForm from './forms/AddUserForm'
 // import EditUserForm from './forms/EditUserForm'
 // import UserTable from './tables/UserTable'
@@ -79,16 +83,16 @@ import ReactDOM from 'react-dom'
 class App extends React.Component {
   state = {
     isLoading: true,
-    users: [],
+    projects: [],
     error: null
   };
 
-  fetchUsers() {
+  fetchProjects() {
     fetch(`http://u0713882.plsk.regruhosting.ru/api/projects`)
       .then(response => response.json())
       .then(data =>
         this.setState({
-          users: data,
+          projects: data,
           isLoading: false,
         })
       )
@@ -96,21 +100,28 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchUsers();
+    this.fetchProjects();
   }
+
+  showAlert(id, e) {
+    alert("Show project " + id);
+  }
+
   render() {
-    const { isLoading, users, error } = this.state;
+    const { isLoading, projects, error } = this.state;
     return (
       <React.Fragment>
-        <h1>Random User</h1>
+        <h1>Projects</h1>
         {error ? <p>{error.message}</p> : null}
         {!isLoading ? (
-          users.map(user => {
-            const { id, name } = user;
+          projects.map(project => {
+            const { id, name } = project;
             return (
               <div>
-                <p>ID: {id}</p>
+                {/* <p>ID: {id}</p> */}
                 <p>Name: {name}</p>
+                
+                <button onClick={(e) => this.showAlert(id, e)}>Show project details</button>
                 <hr />
               </div>
             );
