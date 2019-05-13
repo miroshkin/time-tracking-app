@@ -91,7 +91,7 @@ updateRegistration(data) {
 }
 
 addRegistration(data) {
-  fetch('http://u0713882.plsk.regruhosting.ru/api/timeregistrations/', {
+  fetch('http://u0713882.plsk.regruhosting.ru/api/timeregistrations?projectId=1', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: '{"date":"2019-05-06T00:00:00","workTypeId": 1,"duration":4}'
