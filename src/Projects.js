@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Link } from "react-router-dom";
+import Moment from 'moment';
 
 class Projects extends Component {
 
@@ -132,18 +133,6 @@ handleChange(event) {
   this.setState({[event.target.name]: event.target.value}); 
 }
 
-// handleAddDate (event) {
-//   this.setState({addDate: event.target.value});
-// }
-
-// handleAddDuration (event) {
-//   this.setState({addDuration: event.target.value});
-// }
-
-// handleAddWorkType (event) {
-//   this.setState({addWorkType: event.target.value});
-// }
-
   onEditHandle(event) {
     this.setState({
       edit: true,
@@ -180,16 +169,16 @@ handleChange(event) {
       edit: false
     });
 
-    this.fetchProjectDetails();
+    window.location.reload();
 
   }
 
   renderEditForm() {
     if (this.state.edit) {
       return <form onSubmit={this.onUpdateHandle.bind(this)}>
-      <input type="text" name="updateTimeRegistrationId" value={this.state.updateTimeRegistrationId} disabled={true}></input>
-        <input type="date" name="updateDate" value={this.state.updateDate} onChange={this.handleChange}></input>
-          <select name="updateDuration" value={this.state.updateDuration} defaultValue={this.state.updateDuration} onChange={this.handleChange}>
+      <label>ID: </label><input type="text" name="updateTimeRegistrationId" value={this.state.updateTimeRegistrationId} disabled={true}></input><br></br>
+        <label>Date: </label><input type="date" name="updateDate" value={this.state.updateDate} onChange={this.handleChange}></input><br></br>
+          <label>Duration: </label><select name="updateDuration" value={this.state.updateDuration} defaultValue={this.state.updateDuration} onChange={this.handleChange}>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -202,8 +191,8 @@ handleChange(event) {
             <option value="10">10</option>
             <option value="11">11</option>
             <option value="12">12</option>
-          </select>
-          <select name="updateWorkType" value={this.state.updateWorkType} onChange={this.handleChange} defaultValue={this.state.updateWorkType}>
+          </select><br></br>
+          <label>Work Type: </label><select name="updateWorkType" value={this.state.updateWorkType} onChange={this.handleChange} defaultValue={this.state.updateWorkType}>
             <option value="1">Database design</option>
             <option value="2">Business logic</option>
             <option value="3">Website design</option>
@@ -263,7 +252,7 @@ handleChange(event) {
 
             <tr key={item.timeRegistrationId}>
             <td>{item.timeRegistrationId}</td>
-              <td>{item.date}</td>
+              <td>{Moment(item.date).format('DD.MM.YYYY')}</td>
               <td>{item.workTypeName}</td>
               <td>{item.price}</td>
               <td>{item.duration}</td>
