@@ -2,6 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 class App extends React.Component {
+    constructor(props){
+      super(props);
+      this._isMounted = false;
+      this._webAPI = "http://u0713882.plsk.regruhosting.ru/api"
+    }
+
   state = {
     isLoading: true,
     projects: [],
@@ -9,10 +15,10 @@ class App extends React.Component {
   };
 
   fetchProjects() {
-    fetch(`http://u0713882.plsk.regruhosting.ru/api/projects`)
+    fetch(this._webAPI + `/projects`)
       .then(response => response.json())
       .then(data =>
-        this.setState({
+        this._isMounted && this.setState({
           projects: data,
           isLoading: false,
         })
@@ -21,7 +27,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchProjects();
+    this._isMounted = true;
+    this._isMounted && this.fetchProjects();
+  }
+
+  componentWillUnmount(){
+    this._isMounted = false;
   }
 
   goToProjectDetails(id) {
@@ -32,27 +43,27 @@ class App extends React.Component {
     const { isLoading, projects, error } = this.state;
     return (
       <React.Fragment>
-        <h1>Projects</h1>
+        <h1 className="mx-2">Projects</h1>
         {error ? <p>{error.message}</p> : null}
+        <hr />
         {!isLoading ? (
           projects.map(project => {
             const { id, name } = project;
             return (
-              <div>
-                <p>{name}</p>
-                <button onClick={(e) => this.goToProjectDetails(id)}>Show project details</button>
+              <div key={id}>
+                <p className="mx-2">{name}</p>
+                <button onClick={(e) => this.goToProjectDetails(id)} className="mx-2">Show project details</button>
                 <hr />
               </div>
             );
           })
         ) : (
-          <h3>Loading...</h3>
+          <h3 className="mx-2">Loading...</h3>
         )}
       </React.Fragment>
     );
   }
 }
-
 
 ReactDOM.render(<App />, document.getElementById("root"));
 export default App
