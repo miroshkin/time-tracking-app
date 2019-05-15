@@ -165,10 +165,10 @@ onCancelHandle(event){
   }
 
   render() {
-    const { error } = this.state;
+    const { error, projectName } = this.state;
     return (
       <div>
-          <h1 className="mx-2">Project > {this.state.projectName}</h1>
+          <h1 className="mx-2">{projectName? "Project > " + projectName :  "Project > Loading..." }</h1>
           <div className="mx-2 mb-3"><Link to="/">Back to Projects page</Link></div>
           
         {this.renderEditForm()}
