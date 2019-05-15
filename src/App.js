@@ -44,7 +44,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <h1 className="mx-2">Projects</h1>
-        {error ? <p>{error.message}</p> : null}
+        {error ? <p className="mx-2">{error.message}</p> : null}
         <hr />
         {!isLoading ? (
           projects.map(project => {

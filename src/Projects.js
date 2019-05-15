@@ -159,7 +159,7 @@ onCancelHandle(event){
           </select>
         <button className="mr-2">Update</button>
         <button onClick={this.onCancelHandle.bind(this)}>Cancel</button>
-        {error ? <div class="alert alert-danger" role="alert">{error.message}.</div> : null}
+        {error ? <div class="alert alert-danger mx-2" role="alert">{error.message}.</div> : null}
       </form>
     }
   }
@@ -196,7 +196,7 @@ onCancelHandle(event){
             <option value="5">UX design</option>
           </select>
           <button className="mr-2">Add</button>
-          {error ? <div class="alert alert-danger" role="alert">{error.message}.</div> : null}
+          {error ? <div class="alert alert-danger mx-2" role="alert">{error.message}.</div> : null}
         </form>
         <table>
         <thead><tr>
