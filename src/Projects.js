@@ -58,7 +58,6 @@ class Projects extends Component {
     method: 'DELETE',
     headers: {'Content-Type': 'application/json'}
   })
-  .then(res => res.json()) 
   .catch(error => this.setState({ error}));
 
   await this.fetchProjectDetails();
@@ -73,7 +72,6 @@ async updateRegistration() {
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(updateData)
   })
-  .then(res => res.text())
   .catch(error => this.setState({ error }));
 
   await this.fetchProjectDetails();
@@ -89,12 +87,6 @@ async addRegistration() {
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(addData)
   })
-  
-  .then(res => res.json())
-  .then(res => this.setState(previousState => ({
-    registrations: [...previousState.registrations, res]
-    })))
-  .then()
   .catch(error => this.setState({ error }));
 
   await this.fetchProjectDetails();
