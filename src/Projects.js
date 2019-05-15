@@ -53,33 +53,38 @@ class Projects extends Component {
       .catch(error => this.setState({ error }));
   }
 
-  deleteRegistration(id)  {
-    fetch(this._webAPI + '/timeregistrations/' + id, {
+  async deleteRegistration(id)  {
+    await fetch(this._webAPI + '/timeregistrations/' + id, {
     method: 'DELETE',
     headers: {'Content-Type': 'application/json'}
   })
   .then(res => res.json()) 
   .catch(error => this.setState({ error}));
+
+  await this.fetchProjectDetails();
 }
 
-updateRegistration() {
+async updateRegistration() {
 
   var updateData = {"timeRegistrationId": this.state.updateTimeRegistrationId, "date": this.state.updateDate, "workTypeId": this.state.updateWorkType, "duration": this.state.updateDuration};
   
-  fetch(this._webAPI + '/timeregistrations/' + this.state.updateTimeRegistrationId, {
+  await fetch(this._webAPI + '/timeregistrations/' + this.state.updateTimeRegistrationId, {
     method: 'PUT',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(updateData)
   })
   .then(res => res.text())
   .catch(error => this.setState({ error }));
+
+  await this.fetchProjectDetails();
 }
 
-addRegistration() {
+
+async addRegistration() {
 
   var addData = {"date": this.state.addDate, "workTypeId": this.state.addWorkType, "duration": this.state.addDuration};
   
-  fetch(this._webAPI + '/timeregistrations?projectId=' + this.state.projectId, {
+  await fetch(this._webAPI + '/timeregistrations?projectId=' + this.state.projectId, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(addData)
@@ -89,7 +94,10 @@ addRegistration() {
   .then(res => this.setState(previousState => ({
     registrations: [...previousState.registrations, res]
     })))
+  .then()
   .catch(error => this.setState({ error }));
+
+  await this.fetchProjectDetails();
 }
 
 handleChange(event) {
@@ -134,7 +142,7 @@ onCancelHandle(event){
   renderEditForm() {
     const { error } = this.state;
     if (this.state.edit) {
-      return <form onSubmit={this.onUpdateHandle.bind(this)}>
+      return <form id="project_details_form" onSubmit={this.onUpdateHandle.bind(this)}>
         <input type="date" name="updateDate" value={this.state.updateDate} onChange={this.handleChange} className="mx-2"></input>
           <select name="updateDuration" value={this.state.updateDuration} onChange={this.handleChange} className="mr-2">
           <option value="1">1h</option>
@@ -172,7 +180,7 @@ onCancelHandle(event){
           <div className="mx-2 mb-3"><Link to="/">Back to Projects page</Link></div>
           
         {this.renderEditForm()}
-        <form onSubmit={this.onSubmitHandle.bind(this)}>
+        <form id="project_details_form" onSubmit={this.onSubmitHandle.bind(this)}>
           <input type="date" name="addDate" value={this.state.addDate} onChange={this.handleChange} className="mx-2 my-2"></input>
           <select name="addDuration" value={this.state.addDuration} onChange={this.handleChange} className="mr-2">
             <option value="1">1h</option>
