@@ -165,7 +165,7 @@ onCancelHandle(event){
   }
 
   render() {
-    const { error, projectName } = this.state;
+    const { error, projectName, totalSum } = this.state;
     return (
       <div>
           <h1 className="mx-2">{projectName? "Project > " + projectName :  "Project > Loading..." }</h1>
@@ -222,7 +222,7 @@ onCancelHandle(event){
           ))}
           </tbody>
         </table>
-        <h4 className="mx-2">Total sum: ${this.state.totalSum}</h4>
+        <h4 className="mx-2">{projectName? "Total sum: $" + totalSum :  "" }</h4>
       </div>
     );
   }
