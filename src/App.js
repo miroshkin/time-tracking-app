@@ -48,10 +48,10 @@ class App extends React.Component {
         <hr />
         {!isLoading ? (
           projects.map(project => {
-            const { id, name } = project;
+            const { id, name, customerName } = project;
             return (
               <div key={id}>
-                <p className="mx-2">{name}</p>
+                <p className="mx-2">{customerName} - {name}</p>
                 <button onClick={(e) => this.goToProjectDetails(id)} className="mx-2">Show project details</button>
                 <hr />
               </div>

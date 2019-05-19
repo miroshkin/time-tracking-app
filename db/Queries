@@ -1,0 +1,17 @@
+SELECT table_name
+FROM information_schema.tables
+
+
+SELECT *
+FROM Customers
+
+SELECT *
+FROM Projects
+
+SELECT * 
+FROM WorkTypes
+
+SELECT * 
+FROM TimeRegistrations
+
+
