@@ -5,13 +5,19 @@ FROM information_schema.tables
 SELECT *
 FROM Customers
 
+INSERT INTO Customers (Name) VALUES ('New Customer')
+
 SELECT *
 FROM Projects
+
+INSERT INTO Projects (Name, CustomerId) VALUES ('New Project Name', 4)
 
 SELECT * 
 FROM WorkTypes
 
 SELECT * 
 FROM TimeRegistrations
+
+
 
 
